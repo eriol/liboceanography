@@ -29,6 +29,9 @@ double salinity(double conductivity, double temperature, double pressure)
     double corrected_temperature, rt;
     corrected_temperature = temperature - 15.0;
 
+    if (conductivity <= 5e-4)
+        return 0.0;
+
     rt = conductivity / (RT35(temperature) * (1.0 + C(pressure) /
                                               (B(temperature) + A(temperature)
                                               * conductivity)));
@@ -42,6 +45,9 @@ double conductivity(double salinity, double temperature, double pressure)
     double corrected_temperature, rt, si, dels, rtt, cp, bt, r;
     int n = 0;
     corrected_temperature = temperature - 15.0;
+
+    if (salinity <= 0.02)
+        return 0.0;
 
     rt = sqrt(salinity / 35.0);
     si = _sal(rt, corrected_temperature);
