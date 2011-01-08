@@ -16,6 +16,14 @@ static double _sal(double xr, double xt)
             * xr -0.0056) * xr + 0.0005);
 }
 
+static double _dsal(double xr, double xt)
+{
+    return ((((13.5405 * xr - 28.1044) * xr + 42.2823) * xr + 50.7702)
+            * xr - 0.1692) + ( xt / (1.0 + 0.0162 * xt)) *
+           ((((-0.0720 * xr + 0.2544) * xr -0.1125) * xr - 0.0132)
+            * xr -0.0056);
+}
+
 double salinity(double conductivity, double temperature, double pressure)
 {
     double corrected_temperature, rt;
@@ -27,4 +35,28 @@ double salinity(double conductivity, double temperature, double pressure)
     rt = sqrt(fabs(rt));
 
     return _sal(rt, corrected_temperature);
+}
+
+double conductivity(double salinity, double temperature, double pressure)
+{
+    double corrected_temperature, rt, si, dels, rtt, cp, bt, r;
+    int n = 0;
+    corrected_temperature = temperature - 15.0;
+
+    rt = sqrt(salinity / 35.0);
+    si = _sal(rt, corrected_temperature);
+
+    do {
+        rt = rt + (salinity - si) / _dsal(rt, corrected_temperature);
+        si = _sal(rt, corrected_temperature);
+        dels = fabs(si - salinity);
+        n++;
+    } while(n < 10 && dels > 1.0e-4);
+
+    rtt = RT35(temperature) * rt * rt;
+    cp = rtt * (C(pressure) + B(temperature));
+    bt = B(temperature) - rtt * A(temperature);
+    r = sqrt(fabs(bt * bt + 4.0 * A(temperature) * cp)) - bt;
+
+    return 0.5 * r / A(temperature);
 }
