@@ -66,3 +66,31 @@ double conductivity(double salinity, double temperature, double pressure)
 
     return 0.5 * r / A(temperature);
 }
+
+double specific_volume_anomaly(double salinity, double temperature,
+                               double pressure, double *sigma)
+{
+    double sig, sr, r1, r2, r3, r4;
+    double a, b, c, d, e, a1, b1, aw, bw, k, ko, kw, k35, v350p, sva;
+
+    double r3500 = 1028.1063;
+    double dr350 = 28.106331;
+    r4 = 4.8314e-4;
+
+    pressure = pressure / 10.;
+    sr = sqrt(fabs(salinity));
+
+    r1 = ((((6.536332e-9 * temperature - 1.120083e-6) * temperature +
+          1.001685e-4) * temperature - 9.095290e-3) * temperature +
+          6.793952e-2) * temperature - 28.263737;
+    r2 = (((5.3875e-9 * temperature - 8.2467e-7) * temperature + 7.6438e-5) *
+          temperature - 4.0899e-3) * temperature + 8.24493e-1;
+    r3 = (-1.6546e-6 * temperature + 1.0227e-4) * temperature - 5.72466e-3;
+    sig = (r4 * salinity + r3 * sr + r2) * salinity + r1;
+    v350p = 1.0 / r3500;
+    sva = -sig * v350p / (r3500 + sig);
+    *sigma = sig + dr350;
+    if (pressure == 0.0)
+        return sva * 1.0e+8;
+
+}

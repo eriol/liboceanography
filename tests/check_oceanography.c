@@ -35,12 +35,24 @@ START_TEST(test_conductivity)
 }
 END_TEST
 
+START_TEST(test_specific_volume_anomaly)
+{
+    double sigma;
+    ck_assert(cmp_double(specific_volume_anomaly(0, 0, 0, &sigma),
+                         2749.539368));
+    ck_assert(cmp_double(sigma, -0.1574));
+
+}
+END_TEST
+
+
 Suite *oceanography_suite(void)
 {
     Suite *s = suite_create("Oceanography");
     TCase *tc_core = tcase_create("Core");
     tcase_add_test(tc_core, test_salinity);
     tcase_add_test(tc_core, test_conductivity);
+    tcase_add_test(tc_core, test_specific_volume_anomaly);
     suite_add_tcase(s, tc_core);
 
     return s;
