@@ -70,8 +70,8 @@ double conductivity(double salinity, double temperature, double pressure)
 double specific_volume_anomaly(double salinity, double temperature,
                                double pressure, double *sigma)
 {
-    double sig, sr, r1, r2, r3, r4;
-    double a, b, c, d, e, a1, b1, aw, bw, k, ko, kw, k35, v350p, sva;
+    double sig, sr, r1, r2, r3, r4, a, b, c, d, e, a1, b1, aw, bw;
+    double ko, kw, k35, v350p, sva, gam, pk, dr35p, dk, dvan;
 
     double r3500 = 1028.1063;
     double dr350 = 28.106331;
@@ -90,7 +90,37 @@ double specific_volume_anomaly(double salinity, double temperature,
     v350p = 1.0 / r3500;
     sva = -sig * v350p / (r3500 + sig);
     *sigma = sig + dr350;
+
     if (pressure == 0.0)
         return sva * 1.0e+8;
 
+    e = (9.1697e-10 * temperature + 2.0816e-8) * temperature - 9.9348e-7;
+    bw = (5.2787e-8 * temperature - 6.12293e-6) * temperature + 3.47718e-5;
+    b = bw + e * salinity;
+
+    d = 1.91075e-4;
+    c = (-1.6078e-6 * temperature - 1.0981e-5) * temperature + 2.2838e-3;
+    aw = ((-5.77905e-7 * temperature + 1.16092e-4) * temperature +
+          1.43713e-3) * temperature - 0.1194975;
+    a = (d * sr + c) * salinity + aw;
+
+    b1 = (-5.3009e-4 * temperature + 1.6483e-2) * temperature + 7.944e-2;
+    a1 = ((-6.1670e-5 * temperature + 1.09987e-2) * temperature - 0.603459) *
+         temperature + 54.6746;
+    kw = (((-5.155288e-5 * temperature + 1.360477e-2) * temperature -
+          2.327105) * temperature +148.4206) * temperature - 1930.06;
+    ko = (b1 * sr + a1) * salinity + kw;
+
+    dk = (b * pressure + a) * pressure + ko;
+    k35 = (5.03217e-5 * pressure + 3.359406) * pressure + 21582.27;
+    gam = pressure / k35;
+    pk = 1.0 - gam;
+    sva = sva * pk + (v350p + sva) * pressure * dk / (k35 * (k35 + dk));
+    v350p = v350p * pk;
+
+    dr35p = gam / v350p;
+    dvan = sva / (v350p * (v350p + sva));
+    *sigma = dr350 + dr35p - dvan;
+
+    return sva * 1.0e+8;
 }

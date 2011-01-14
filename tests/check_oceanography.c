@@ -38,10 +38,22 @@ END_TEST
 START_TEST(test_specific_volume_anomaly)
 {
     double sigma;
+
     ck_assert(cmp_double(specific_volume_anomaly(0, 0, 0, &sigma),
                          2749.539368));
     ck_assert(cmp_double(sigma, -0.1574));
 
+    ck_assert(cmp_double(specific_volume_anomaly(0, 0, 1000, &sigma),
+                             2692.644915));
+    ck_assert(cmp_double(sigma, 4.872729));
+
+    ck_assert(cmp_double(specific_volume_anomaly(40, 0, 0, &sigma),
+                         -380.789102));
+    ck_assert(cmp_double(sigma, 32.147101));
+
+    ck_assert(cmp_double(specific_volume_anomaly(40, 40, 10000, &sigma),
+                         981.301907));
+    ck_assert(cmp_double(sigma, 59.820375));
 }
 END_TEST
 
