@@ -124,3 +124,17 @@ double specific_volume_anomaly(double salinity, double temperature,
 
     return sva * 1.0e+8;
 }
+
+double depth(double pressure, double latitude)
+{
+    double x, gr, depth;
+
+    x = sin(latitude / 57.29578);
+    x = x * x;
+    gr = 9.780318 * (1.0 + (5.2788e-3 + 2.36e-5 * x) * x) + 1.092e-6 *
+         pressure;
+    depth = (((-1.82e-15 * pressure + 2.279e-10) * pressure - 2.2512e-5) *
+             pressure + 9.72659) * pressure;
+
+    return depth / gr;
+}
