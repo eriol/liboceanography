@@ -1,5 +1,4 @@
-/* test_oceanography.c -- Unit tests for liboceanography.
- *
+/*
  * Copyright 2011 Daniele Tricoli <eriol@mornie.org>
  *
  * This file is part of liboceanography.
@@ -16,6 +15,9 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this library. If not, see http://www.gnu.org/licenses/.
+ *
+ *
+ * test_oceanography.c -- Unit tests for liboceanography.
  */
 
 #include <math.h>
