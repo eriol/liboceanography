@@ -10,5 +10,7 @@ double freezing_point(double salinity, double pressure);
 double specific_heat(double salinity, double temperature, double pressure);
 double adiabatic_temperature_gradient(double salinity, double temperature,
                                       double pressure);
+double potential_temperature(double salinity, double temperature,
+                             double pressure, double reference_pressure);
 
 #endif

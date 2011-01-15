@@ -192,3 +192,25 @@ double adiabatic_temperature_gradient(double salinity, double temperature,
             temperature + 1.8932e-6) * salinity + ((6.6228e-10 * temperature -
             6.836e-8) * temperature + 8.5258e-6) * temperature + 3.5803e-5;
 }
+
+double potential_temperature(double salinity, double temperature,
+                             double pressure, double reference_pressure)
+{
+    double h, xk, q;
+
+    h = reference_pressure - pressure;
+    xk = h * adiabatic_temperature_gradient(salinity, temperature, pressure);
+    temperature += 0.5 * xk;
+    q = xk;
+    pressure += 0.5 * h;
+    xk = h * adiabatic_temperature_gradient(salinity, temperature, pressure);
+    temperature += 0.29289322 * (xk - q);
+    q = 0.58578644 * xk + 0.121320344 * q;
+    xk = h * adiabatic_temperature_gradient(salinity, temperature, pressure);
+    temperature += 1.707106781 * (xk - q);
+    q = 3.414213562 * xk - 4.121320344 * q;
+    pressure += 0.5 * h;
+    xk = h * adiabatic_temperature_gradient(salinity, temperature, pressure);
+
+    return temperature + (xk - 2.0 * q) / 0.6;
+}

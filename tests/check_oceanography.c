@@ -93,6 +93,17 @@ START_TEST(test_adiabatic_temperature_gradient)
 }
 END_TEST
 
+START_TEST(test_potential_temperature)
+{
+    ck_assert(cmp_double(potential_temperature(25, 0, 0, 0), 0.000000));
+    ck_assert(cmp_double(potential_temperature(25, 40, 0, 0), 40.000000));
+    ck_assert(cmp_double(potential_temperature(30, 20, 9000, 0),
+                         18.296537));
+    ck_assert(cmp_double(potential_temperature(40, 40, 10000, 0.0),
+                         36.998992));
+}
+END_TEST
+
 
 Suite *oceanography_suite(void)
 {
@@ -105,6 +116,7 @@ Suite *oceanography_suite(void)
     tcase_add_test(tc_core, test_freezing_point);
     tcase_add_test(tc_core, test_specific_heat);
     tcase_add_test(tc_core, test_adiabatic_temperature_gradient);
+    tcase_add_test(tc_core, test_potential_temperature);
     suite_add_tcase(s, tc_core);
 
     return s;
