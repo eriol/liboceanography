@@ -62,7 +62,15 @@ START_TEST(test_depth)
 {
     ck_assert(cmp_double(depth(500, 0), 496.652992));
     ck_assert(cmp_double(depth(10000, 30), 9712.653072));
-    ck_assert_msg(cmp_double(depth(10000, 90), 9674.231441));
+    ck_assert(cmp_double(depth(10000, 90), 9674.231441));
+}
+END_TEST
+
+START_TEST(test_freezing_point)
+{
+    ck_assert(cmp_double(freezing_point(5, 0), -0.273763));
+    ck_assert(cmp_double(freezing_point(20, 300), -1.309106));
+    ck_assert(cmp_double(freezing_point(40, 500), -2.588567));
 }
 END_TEST
 
@@ -75,6 +83,7 @@ Suite *oceanography_suite(void)
     tcase_add_test(tc_core, test_conductivity);
     tcase_add_test(tc_core, test_specific_volume_anomaly);
     tcase_add_test(tc_core, test_depth);
+    tcase_add_test(tc_core, test_freezing_point);
     suite_add_tcase(s, tc_core);
 
     return s;

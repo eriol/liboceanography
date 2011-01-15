@@ -138,3 +138,9 @@ double depth(double pressure, double latitude)
 
     return depth / gr;
 }
+
+double freezing_point(double salinity, double pressure)
+{
+    return (-0.0575 + 1.710523e-3 * sqrt(fabs(salinity)) - 2.154996e-4 *
+            salinity) * salinity - 7.53e-4 * pressure;
+}
