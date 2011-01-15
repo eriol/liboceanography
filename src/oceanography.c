@@ -22,6 +22,9 @@
  * Functions of this library are a porting of "Algorithms for computation of
  * fundamental properties of seawater", Unesco techical papers in marine
  * science 44.
+ *
+ * All the original paper variable names are maintained, so for a deep
+ * explaination you can see it.
  */
 
 #include <math.h>
@@ -50,6 +53,15 @@ static double _dsal(double xr, double xt)
             * xr -0.0056);
 }
 
+/* salinity -- convert conductivity ratio to salinity.
+ *
+ * Units:
+ *     temperature -- degrees Celsius
+ *     pressure  -- decibars
+ *
+ * Returns salinity in PSS-78.
+ */
+
 double salinity(double conductivity, double temperature, double pressure)
 {
     double corrected_temperature, rt;
@@ -65,6 +77,14 @@ double salinity(double conductivity, double temperature, double pressure)
 
     return _sal(rt, corrected_temperature);
 }
+
+/* conductivity -- convert salinity to conductivity ratio.
+ *
+ * Units:
+ *     salinity -- PSS-78
+ *     temperature -- degrees Celsius
+ *     pressure  -- decibars
+ */
 
 double conductivity(double salinity, double temperature, double pressure)
 {
@@ -92,6 +112,17 @@ double conductivity(double salinity, double temperature, double pressure)
 
     return 0.5 * r / A(temperature);
 }
+
+/* specific_volume_anomaly -- compute specific volume anomaly (steric anomaly).
+ *
+ * Units:
+ *     salinity -- PSS-78
+ *     temperature -- degrees Celsius
+ *     pressure  -- decibars
+ *     sigma (density anomaly) -- Kg/m^3
+ *
+ * Returns specific volume anomaly as 1.0e-8 m^3/Kg.
+ */
 
 double specific_volume_anomaly(double salinity, double temperature,
                                double pressure, double *sigma)
@@ -151,6 +182,15 @@ double specific_volume_anomaly(double salinity, double temperature,
     return sva * 1.0e+8;
 }
 
+/* depth -- compute depth from pressure using Saunders and Fofonoff's method.
+ *
+ * Units:
+ *     pressure  -- decibars
+ *     latitude -- degrees
+ *
+ * Returns depth in meters.
+ */
+
 double depth(double pressure, double latitude)
 {
     double x, gr, depth;
@@ -165,11 +205,30 @@ double depth(double pressure, double latitude)
     return depth / gr;
 }
 
+/* freezing_point -- compute the freezing point of seawater.
+ *
+ * Units:
+ *     salinity -- PSS-78
+ *     pressure  -- decibars
+ *
+ * Returns freezing point in degrees Celsius.
+ */
+
 double freezing_point(double salinity, double pressure)
 {
     return (-0.0575 + 1.710523e-3 * sqrt(fabs(salinity)) - 2.154996e-4 *
             salinity) * salinity - 7.53e-4 * pressure;
 }
+
+/* specific_heat -- compute the specific heat of seawater.
+ *
+ * Units:
+ *     salinity -- PSS-78
+ *     temperature -- degrees Celsius
+ *     pressure  -- decibars
+ *
+ * Returns specific heat in J/(Kg °C).
+ */
 
 double specific_heat(double salinity, double temperature, double pressure)
 {
@@ -206,6 +265,17 @@ double specific_heat(double salinity, double temperature, double pressure)
     return cp0 + cp1 + cp2;
 }
 
+/* adiabatic_temperature_gradient -- compute the adiabatic temperature
+ * gradient.
+ *
+ * Units:
+ *     salinity -- PSS-78
+ *     temperature -- degrees Celsius
+ *     pressure  -- decibars
+ *
+ * Returns adiabatic temperature gradient in °C/decibars.
+ */
+
 double adiabatic_temperature_gradient(double salinity, double temperature,
                                       double pressure)
 {
@@ -218,6 +288,18 @@ double adiabatic_temperature_gradient(double salinity, double temperature,
             temperature + 1.8932e-6) * salinity + ((6.6228e-10 * temperature -
             6.836e-8) * temperature + 8.5258e-6) * temperature + 3.5803e-5;
 }
+
+/* potential_temperature -- compute the local potential temperature at
+ * reference pressure.
+ *
+ * Units:
+ *     salinity -- PSS-78
+ *     temperature -- degrees Celsius
+ *     pressure  -- decibars
+ *     reference_pressure  -- decibars
+ *
+ * Returns local potential temperature in degrees Celsius.
+ */
 
 double potential_temperature(double salinity, double temperature,
                              double pressure, double reference_pressure)
@@ -240,6 +322,16 @@ double potential_temperature(double salinity, double temperature,
 
     return temperature + (xk - 2.0 * q) / 0.6;
 }
+
+/* sound_speed -- compute the speed of sound in seawater by Chen and Millero.
+ *
+ * Units:
+ *     salinity -- PSS-78
+ *     temperature -- degrees Celsius
+ *     pressure  -- decibars
+ *
+ * Returns sound speed in meters/second.
+ */
 
 double sound_speed(double salinity, double temperature, double pressure)
 {
