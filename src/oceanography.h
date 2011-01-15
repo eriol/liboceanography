@@ -14,4 +14,4 @@ double potential_temperature(double salinity, double temperature,
                              double pressure, double reference_pressure);
 double sound_speed(double salinity, double temperature, double pressure);
 
-#endif
+#endif /* OCEANOGRAPHY_H */
