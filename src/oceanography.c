@@ -1,3 +1,29 @@
+/*
+ * Copyright 2011 Daniele Tricoli <eriol@mornie.org>
+ *
+ * This file is part of liboceanography.
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by the
+ * Free Software Foundation; either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library. If not, see http://www.gnu.org/licenses/.
+ *
+ *
+ * oceanography.c -- Main functions of liboceanography.
+ *
+ * Functions of this library are a porting of "Algorithms for computation of
+ * fundamental properties of seawater", Unesco techical papers in marine
+ * science 44.
+ */
+
 #include <math.h>
 
 #include "oceanography.h"
