@@ -144,3 +144,38 @@ double freezing_point(double salinity, double pressure)
     return (-0.0575 + 1.710523e-3 * sqrt(fabs(salinity)) - 2.154996e-4 *
             salinity) * salinity - 7.53e-4 * pressure;
 }
+
+double specific_heat(double salinity, double temperature, double pressure)
+{
+    double a, b, c, cp0, cp1, cp2, sr;
+
+    pressure = pressure / 10.0;
+    sr = sqrt(fabs(salinity));
+
+    a = (-1.38385e-3 * temperature + 0.1072763) * temperature - 7.643575;
+    b = (5.148e-5 * temperature - 4.07718e-3) * temperature + 0.1770383;
+    c = (((2.093236e-5 * temperature - 2.654387e-3) * temperature +
+         0.1412855) * temperature -3.720283) * temperature + 4217.4;
+    cp0 = (b * sr + a) * salinity + c;
+
+    a = (((1.7168e-8 * temperature + 2.0357e-6) * temperature - 3.13885e-4) *
+         temperature + 1.45747e-2) * temperature - 0.49592;
+    b = (((2.2956e-11 * temperature - 4.0027e-9) * temperature + 2.87533e-7) *
+         temperature - 1.08645e-5) * temperature + 2.4931e-4;
+    c = ((6.136e-13 * temperature - 6.5637e-11) * temperature + 2.6380e-9) *
+         temperature - 5.422e-8;
+    cp1 = ((c * pressure + b) * pressure + a) * pressure;
+
+    a = (((-2.9179e-10 * temperature + 2.5941e-8) * temperature + 9.802e-7) *
+         temperature - 1.28315e-4) * temperature + 4.9247e-3;
+    b = (3.122e-8 * temperature -1.517e-6) * temperature - 1.2331e-4;
+    a = (a + b * sr) * salinity;
+    b = ((1.8448e-11 * temperature - 2.3905e-9) * temperature + 1.17054e-7) *
+        temperature - 2.9558e-6;
+    b = (b + 9.971e-8 * sr) * salinity;
+    c = (3.513e-13 * temperature - 1.7682e-11) * temperature + 5.540e-10;
+    c = (c - 1.4300e-12 * temperature * sr) * salinity;
+    cp2 = ((c * pressure + b) * pressure + a) * pressure;
+
+    return cp0 + cp1 + cp2;
+}

@@ -74,6 +74,13 @@ START_TEST(test_freezing_point)
 }
 END_TEST
 
+START_TEST(test_specific_heat)
+{
+    ck_assert(cmp_double(specific_heat(25, 0, 0), 4048.440412));
+    ck_assert(cmp_double(specific_heat(35, 20, 5000), 3894.992770));
+    ck_assert(cmp_double(specific_heat(40, 40, 10000), 3849.499481));
+}
+END_TEST
 
 Suite *oceanography_suite(void)
 {
@@ -84,6 +91,7 @@ Suite *oceanography_suite(void)
     tcase_add_test(tc_core, test_specific_volume_anomaly);
     tcase_add_test(tc_core, test_depth);
     tcase_add_test(tc_core, test_freezing_point);
+    tcase_add_test(tc_core, test_specific_heat);
     suite_add_tcase(s, tc_core);
 
     return s;
