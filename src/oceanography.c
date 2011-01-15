@@ -179,3 +179,16 @@ double specific_heat(double salinity, double temperature, double pressure)
 
     return cp0 + cp1 + cp2;
 }
+
+double adiabatic_temperature_gradient(double salinity, double temperature,
+                                      double pressure)
+{
+    salinity = salinity - 35.0;
+
+    return (((-2.1687e-16 * temperature + 1.8676e-14) * temperature -
+            4.6206e-13) * pressure + ((2.7759e-12 * temperature - 1.1351e-10) *
+            salinity + ((-5.4481e-14 * temperature + 8.733e-12) * temperature -
+            6.7795e-10) * temperature + 1.8741e-8)) * pressure + (-4.2393e-8 *
+            temperature + 1.8932e-6) * salinity + ((6.6228e-10 * temperature -
+            6.836e-8) * temperature + 8.5258e-6) * temperature + 3.5803e-5;
+}
