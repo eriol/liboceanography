@@ -3,7 +3,7 @@ include_directories (. ../src/)
 add_definitions(-Wall -Wextra -pedantic -ansi -std=c89)
 link_libraries(check oceanography)
 
-add_executable(check_oceanography ${COMMON} check_oceanography.c)
+add_executable(test_oceanography ${COMMON} test_oceanography.c)
 
 enable_testing()
-add_test(check_oceanography check_oceanography)
+add_test(test_oceanography test_oceanography)
