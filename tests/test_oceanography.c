@@ -25,7 +25,7 @@
 
 #include <check.h>
 
-#include "../src/oceanography.h"
+#include "oceanography.h"
 
 #define EPSILON 0.00001
 
