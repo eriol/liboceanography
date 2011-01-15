@@ -95,12 +95,20 @@ END_TEST
 
 START_TEST(test_potential_temperature)
 {
-    ck_assert(cmp_double(potential_temperature(25, 0, 0, 0), 0.000000));
+    ck_assert(cmp_double(potential_temperature(25, 0, 0, 0), 0));
     ck_assert(cmp_double(potential_temperature(25, 40, 0, 0), 40.000000));
     ck_assert(cmp_double(potential_temperature(30, 20, 9000, 0),
                          18.296537));
-    ck_assert(cmp_double(potential_temperature(40, 40, 10000, 0.0),
+    ck_assert(cmp_double(potential_temperature(40, 40, 10000, 0),
                          36.998992));
+}
+END_TEST
+
+START_TEST(test_sound_speed)
+{
+    ck_assert(cmp_double(sound_speed(25, 0, 0), 1435.789875));
+    ck_assert(cmp_double(sound_speed(35, 20, 5000), 1604.476282));
+    ck_assert(cmp_double(sound_speed(40, 40, 10000), 1731.995394));
 }
 END_TEST
 
@@ -117,6 +125,7 @@ Suite *oceanography_suite(void)
     tcase_add_test(tc_core, test_specific_heat);
     tcase_add_test(tc_core, test_adiabatic_temperature_gradient);
     tcase_add_test(tc_core, test_potential_temperature);
+    tcase_add_test(tc_core, test_sound_speed);
     suite_add_tcase(s, tc_core);
 
     return s;

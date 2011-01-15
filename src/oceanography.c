@@ -214,3 +214,39 @@ double potential_temperature(double salinity, double temperature,
 
     return temperature + (xk - 2.0 * q) / 0.6;
 }
+
+double sound_speed(double salinity, double temperature, double pressure)
+{
+    double a, a0, a1, a2, a3, b, b0, b1, c, c0, c1, c2, c3, d, sr;
+
+    pressure = pressure / 10.0;
+    sr = sqrt(fabs(salinity));
+
+    d = 1.727e-3 - 7.9836e-6 * pressure;
+
+    b1 = 7.3637e-5 + 1.7945e-7 * temperature;
+    b0 = -1.922e-2 - 4.42e-5 * temperature;
+    b = b0 + b1 * pressure;
+
+    a3 = (-3.389e-13 * temperature + 6.649e-12) * temperature + 1.100e-10;
+    a2 = ((7.988e-12 * temperature - 1.6002e-10) * temperature + 9.1041e-9) *
+         temperature - 3.9064e-7;
+
+    a1 = (((-2.0122e-10 * temperature + 1.0507e-8) * temperature - 6.4885e-8) *
+          temperature - 1.2580e-5) * temperature + 9.4742e-5;
+    a0 = (((-3.21e-8 * temperature + 2.006e-6) * temperature + 7.164e-5) *
+          temperature - 1.262e-2) * temperature + 1.389;
+    a = ((a3 * pressure + a2) * pressure + a1) * pressure + a0;
+
+    c3 = (-2.3643e-12 * temperature + 3.8504e-10) * temperature - 9.7729e-9;
+    c2 = (((1.0405e-12 * temperature - 2.5335e-10) * temperature + 2.5974e-8) *
+          temperature - 1.7107e-6) * temperature + 3.1260e-5;
+    c1 = (((-6.1185e-10 * temperature + 1.3621e-7) * temperature - 8.1788e-6) *
+          temperature + 6.8982e-4) * temperature + 0.153563;
+    c0 = ((((3.1464e-9 * temperature - 1.47800e-6) * temperature + 3.3420e-4) *
+          temperature - 5.80852e-2) * temperature + 5.03711) * temperature +
+          1402.388;
+    c = ((c3 * pressure + c2) * pressure + c1) * pressure + c0;
+
+    return c + (a + b * sr + d * salinity) * salinity;
+}

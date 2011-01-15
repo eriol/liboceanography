@@ -12,5 +12,6 @@ double adiabatic_temperature_gradient(double salinity, double temperature,
                                       double pressure);
 double potential_temperature(double salinity, double temperature,
                              double pressure, double reference_pressure);
+double sound_speed(double salinity, double temperature, double pressure);
 
 #endif
