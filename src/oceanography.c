@@ -23,8 +23,8 @@
  * fundamental properties of seawater", Unesco techical papers in marine
  * science 44.
  *
- * All the original paper variable names are maintained, so for a deep
- * explaination you can see it.
+ * All the original variable names used in the paper are maintained, so for a
+ * deep explaination you can see there.
  */
 
 #include <math.h>
