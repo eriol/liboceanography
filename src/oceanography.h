@@ -37,4 +37,7 @@ double potential_temperature(double salinity, double temperature,
                              double pressure, double reference_pressure);
 double sound_speed(double salinity, double temperature, double pressure);
 
+#define svan(salinity, temperature, pressure, sigma) \
+        specific_volume_anomaly(salinity, temperature, pressure, sigma)
+
 #endif /* OCEANOGRAPHY_H */
