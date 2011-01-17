@@ -116,6 +116,9 @@ START_TEST(test_adiabatic_temperature_gradient)
                          2.416120e-04));
     ck_assert(cmp_double(adiabatic_temperature_gradient(40, 40, 10000),
                          3.255976e-04));
+
+    /* Test again the first case using the function alias atg. */
+    ck_assert(cmp_double(atg(25, 0, 0), 1.687100e-05));
 }
 END_TEST
 

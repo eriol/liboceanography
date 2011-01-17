@@ -39,5 +39,7 @@ double sound_speed(double salinity, double temperature, double pressure);
 
 #define svan(salinity, temperature, pressure, sigma) \
         specific_volume_anomaly(salinity, temperature, pressure, sigma)
+#define atg(salinity, temperature, pressure) \
+        adiabatic_temperature_gradient(salinity, temperature, pressure)
 
 #endif /* OCEANOGRAPHY_H */
