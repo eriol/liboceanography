@@ -130,6 +130,9 @@ START_TEST(test_potential_temperature)
                          18.296537));
     ck_assert(cmp_double(potential_temperature(40, 40, 10000, 0),
                          36.998992));
+
+    /* Test again the first case using the function alias theta. */
+    ck_assert(cmp_double(theta(25, 0, 0, 0), 0));
 }
 END_TEST
 

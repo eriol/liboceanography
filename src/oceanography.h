@@ -41,5 +41,8 @@ double sound_speed(double salinity, double temperature, double pressure);
         specific_volume_anomaly(salinity, temperature, pressure, sigma)
 #define atg(salinity, temperature, pressure) \
         adiabatic_temperature_gradient(salinity, temperature, pressure)
+#define theta(salinity, temperature, pressure, reference_pressure) \
+        potential_temperature(salinity, temperature, pressure, \
+                              reference_pressure)
 
 #endif /* OCEANOGRAPHY_H */
