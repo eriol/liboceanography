@@ -23,6 +23,9 @@
 #ifndef OCEANOGRAPHY_H
 #define OCEANOGRAPHY_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 double salinity(double conductivity, double temperature, double pressure);
 double conductivity(double salinity, double temperature, double pressure);
@@ -44,5 +47,9 @@ double sound_speed(double salinity, double temperature, double pressure);
 #define theta(salinity, temperature, pressure, reference_pressure) \
         potential_temperature(salinity, temperature, pressure, \
                               reference_pressure)
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* OCEANOGRAPHY_H */
