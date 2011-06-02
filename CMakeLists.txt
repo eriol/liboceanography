@@ -19,3 +19,14 @@ add_subdirectory(src)
 add_subdirectory(tests)
 
 enable_testing()
+
+# Packaging stuff
+set(CPACK_SOURCE_PACKAGE_FILE_NAME liboceanography-${oceanography_version})
+set(CPACK_SOURCE_IGNORE_FILES
+    "~$"
+    "^\\\\.*$"
+    "^${PROJECT_SOURCE_DIR}/build/"
+    "^${PROJECT_SOURCE_DIR}/docs/_build/"
+)
+set(CPACK_SOURCE_GENERATOR TGZ)
+include(CPack)
