@@ -27,6 +27,12 @@
 extern "C" {
 #endif
 
+#define OCEANOGRAPHY_VERSION "1.0.0"
+#define OCEANOGRAPHY_VERNUM 0x100
+#define OCEANOGRAPHY_VER_MAJOR 1
+#define OCEANOGRAPHY_VER_MINOR 0
+#define OCEANOGRAPHY_VER_REVISION 0
+
 double salinity(double conductivity, double temperature, double pressure);
 double conductivity(double salinity, double temperature, double pressure);
 double specific_volume_anomaly(double salinity, double temperature,
