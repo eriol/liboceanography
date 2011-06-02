@@ -3,18 +3,17 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to liboceanography's documentation!
-===========================================
+liboceanography
+===============
 
-Contents:
+``liboceanography`` is a C library that provides basic functions for
+calculation of physical properties of sea water.
 
 .. toctree::
    :maxdepth: 2
 
-Indices and tables
-==================
+   getting_started
+   function_reference
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
+:Release: |version|
+:Date: |today|
