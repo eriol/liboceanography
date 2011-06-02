@@ -1,6 +1,10 @@
+# Top-level CMakeLists.txt for liboceanography
+
 cmake_minimum_required(VERSION 2.8)
 
 project(liboceanography C)
+
+set(oceanography_version 1.0.0)
 
 # Prevent build in source directory
 if ("${CMAKE_BINARY_DIR}" STREQUAL "${CMAKE_SOURCE_DIR}")

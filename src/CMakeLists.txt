@@ -5,7 +5,7 @@ add_library(oceanography SHARED ${oceanography_lib_src})
 
 set_target_properties(oceanography
                       PROPERTIES
-                      VERSION 1.0.0
+                      VERSION ${oceanography_version}
                       SOVERSION 1)
 
 install(TARGETS oceanography
