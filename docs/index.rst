@@ -14,6 +14,7 @@ calculation of physical properties of sea water.
 
    getting_started
    function_reference
+   changes
    licensing
 
 :Release: |version|
