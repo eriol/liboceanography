@@ -105,6 +105,9 @@ START_TEST(test_specific_heat)
     ck_assert(cmp_double(specific_heat(25, 0, 0), 4048.440412));
     ck_assert(cmp_double(specific_heat(35, 20, 5000), 3894.992770));
     ck_assert(cmp_double(specific_heat(40, 40, 10000), 3849.499481));
+
+    /* Test again the first case using the function alias cpsw. */
+    ck_assert(cmp_double(cpsw(25, 0, 0), 4048.440412));
 }
 END_TEST
 

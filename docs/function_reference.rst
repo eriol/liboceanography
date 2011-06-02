@@ -6,6 +6,7 @@ Function reference
 #. adiabatic_temperature_gradient
 #. atg
 #. conductivity
+#. cpsw
 #. depth
 #. freezing_point
 #. potential_temperature
@@ -56,6 +57,11 @@ Units::
     salinity -- PSS-78
     temperature -- degrees Celsius
     pressure  -- decibars
+
+cpsw
+----
+
+Alias for :ref:`ref_specific_heat`.
 
 depth
 -----
@@ -142,6 +148,8 @@ Units::
     pressure  -- decibars
 
 Returns sound speed in meters/second.
+
+.. _ref_specific_heat:
 
 specific_heat
 -------------

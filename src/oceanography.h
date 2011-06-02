@@ -53,6 +53,8 @@ double sound_speed(double salinity, double temperature, double pressure);
 #define theta(salinity, temperature, pressure, reference_pressure) \
         potential_temperature(salinity, temperature, pressure, \
                               reference_pressure)
+#define cpsw(salinity, temperature, pressure) \
+             specific_heat(salinity, temperature, pressure)
 
 #ifdef __cplusplus
 }
