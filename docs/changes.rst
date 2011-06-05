@@ -5,4 +5,3 @@ Changes in liboceanography
 ==========================
 
 .. include:: ../CHANGES
- 
