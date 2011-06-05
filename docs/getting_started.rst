@@ -14,8 +14,13 @@ For compiling unit tests you also need `Check unit test framework for C
 Download
 --------
 
-You can download a packaged version of ``liboceanography``
-from http://downloads.mornie.org/liboceanography
+You can download a source tarball of ``liboceanography`` from::
+
+    http://downloads.mornie.org/liboceanography
+
+or you can get latest code on the Mercurial repository::
+
+    http://hg.mornie.org/oceanography/liboceanography
 
 Installing liboceanography
 --------------------------
