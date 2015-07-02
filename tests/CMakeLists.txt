@@ -1,4 +1,4 @@
-link_libraries(check oceanography)
+link_libraries(check oceanography pthread rt)
 
 add_executable(test_oceanography test_oceanography.c)
 
