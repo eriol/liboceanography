@@ -4,7 +4,7 @@ compiler:
 - clang
 install:
 - sudo apt-get update
-- sudo apt-get install -y check
+- sudo apt-get install -y check libsubunit0
 before_script:
 - mkdir build
 - cd build
